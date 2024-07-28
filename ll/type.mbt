@@ -1,18 +1,11 @@
-pub enum FloatingPointKind {
-  HalfFP
-  FloatFP
-  DoubleFP
-  FP128FP
-  X86_FP80FP
-  PPC_FP128FP
-}
+
 
 /// http://llvm.org/docs/LangRef.html#type-system
 pub enum Type {
   VoidType
   IntegerType(~bit_width : UInt)
   PointerType(~refer_type : Type, ~addr_space : AddrSpace)
-  FloatingPointType(~fp_kind : FloatingPointKind)
+  F64 // FloatingPointType Double
   FunctionType(~result_type : Type, ~arg_types : Array[Type], ~is_variable_arg : Bool)
   VectorType(~size : UInt, ~element_type : Type)
   StructureType(~is_packed : Bool, ~field_types : Array[Type])
@@ -41,15 +34,4 @@ pub fn ptr(t : Type) -> Type {
   PointerType(refer_type = t, addr_space = AddrSpace(0))
 }
 
-pub let half : Type = FloatingPointType(fp_kind = HalfFP)
-
-pub let float : Type = FloatingPointType(fp_kind = FloatFP)
-
-pub let double : Type = FloatingPointType(fp_kind = DoubleFP)
-
-pub let fp128 : Type = FloatingPointType(fp_kind = FP128FP)
-
-pub let x86_fp80 : Type = FloatingPointType(fp_kind = X86_FP80FP)
-
-pub let ppc_fp128 : Type = FloatingPointType(fp_kind = PPC_FP128FP)
-
+pub let f64 : Type = F64
