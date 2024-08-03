@@ -1,7 +1,7 @@
 pub enum Name {
   Name(String)
   UnName(UInt)
-}
+} derive (Eq)
 
 pub fn mk_name(str : String) -> Name {
   fn is_ascii(ch : Char) -> Bool {

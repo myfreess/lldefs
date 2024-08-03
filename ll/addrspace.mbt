@@ -1,1 +1,1 @@
-type AddrSpace UInt
+type AddrSpace UInt derive (Eq, Hash)

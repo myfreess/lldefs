@@ -2,7 +2,8 @@ pub enum Constant {
   // merge two concept
   // http://llvm.org/docs/LangRef.html#constants
   // http://llvm.org/docs/LangRef.html#constant-expressions
-  Int(~bit_width : UInt, ~value : @bigint.BigInt)
+  Int(~bit_width : UInt, ~value : BigInt)
+  // Float(~value : Float)
   Double(~value : Double)
   Null(~const_type : Type)
   AggregateZero(~const_type : Type)
@@ -42,5 +43,11 @@ pub enum Constant {
   InttoPtr(~operand : Constant, ~operand_type : Type)
   BitCast(~operand : Constant, ~operand_type : Type)
   AddrSpaceCast(~operand : Constant, ~operand_type : Type)
-  // Unfinish
-}
+  ICmp(~pred : IntegerPredicate, ~operand0 : Constant, ~operand1 : Constant)
+  FCmp(~pred : DoublePredicate, ~operand0 : Constant, ~operand1 : Constant)
+  Select(~condition : Constant, ~then_value : Constant, ~else_value : Constant)
+  ExtractElement(~vector : Constant, ~index : Constant)
+  InsertElement(~vector : Constant, ~index : Constant, ~element : Constant)
+  ExtractValue(~aggregate : Constant, ~indices : Array[UInt])
+  InsertValue(~aggregate : Constant, ~indices : Array[UInt], ~element : Constant)
+} derive(Eq)

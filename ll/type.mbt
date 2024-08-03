@@ -5,6 +5,7 @@ pub enum Type {
   VoidType
   IntegerType(~bit_width : UInt)
   PointerType(~refer_type : Type, ~addr_space : AddrSpace)
+  F32 // FloatingPointType Float
   F64 // FloatingPointType Double
   FunctionType(~result_type : Type, ~arg_types : Array[Type], ~is_variable_arg : Bool)
   VectorType(~size : UInt, ~element_type : Type)
@@ -14,7 +15,7 @@ pub enum Type {
   MetadataType // only to be used as a parameter type for a few intrinsics
   LabelType // only to be used as the type of block names
   TokenType
-}
+} derive (Eq)
 
 pub let void : Type = VoidType
 
@@ -34,4 +35,5 @@ pub fn ptr(t : Type) -> Type {
   PointerType(refer_type = t, addr_space = AddrSpace(0))
 }
 
+pub let f32 : Type = F32
 pub let f64 : Type = F64
