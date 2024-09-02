@@ -3,7 +3,7 @@ pub enum Constant {
   // http://llvm.org/docs/LangRef.html#constants
   // http://llvm.org/docs/LangRef.html#constant-expressions
   Int(~bit_width : UInt, ~value : BigInt)
-  // Float(~value : Float)
+  Float(~value : Float)
   Double(~value : Double)
   Null(~const_type : Type)
   AggregateZero(~const_type : Type)
@@ -51,3 +51,13 @@ pub enum Constant {
   ExtractValue(~aggregate : Constant, ~indices : Array[UInt])
   InsertValue(~aggregate : Constant, ~indices : Array[UInt], ~element : Constant)
 } derive(Eq)
+
+// LLVM types don't include signedness
+fn signed_integer_value(self : Constant) -> BigInt {
+  match self {
+    Int(_) as constint => {
+      let n = constint.bit_width.to_int64()
+      todo("")
+    }
+  }
+}
